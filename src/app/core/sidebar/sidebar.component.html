@@ -1,0 +1,111 @@
+<div class="sidebar-wrapper">
+    <div class="page-wrapper chiller-theme toggled">
+        <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+            <i class="fas fa-bars"></i>
+        </a>
+        <nav id="sidebar" class="sidebar-wrapper">
+            <div class="sidebar-content">
+                <div class="sidebar-brand">
+                    <!-- <img class="img bannerWidth logoWidth" src="./assets/img/logo.svg" /> -->
+                </div>
+                <div class="sidebar-header">
+                    <div class="user-pic">
+                        <img class="img-responsive img-rounded" src="./assets/img/user_profile.png" alt="User picture">
+                    </div>
+                    <div class="user-info">
+                        <span class="user-name">
+                            <strong>{{user.name | uppercase}}</strong>
+                        </span>
+                        <span class="user-role">Administrator</span>
+                        <span class="user-status">
+                            <i class="fa fa-circle"></i>
+                            <span>Online</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul>
+                        <li routerLinkActive="active" *ngFor="let menuItem of menuItems; let index= index"
+                            class="nav-item">
+                            <div *ngIf="menuItem && menuItem.groupName === 'main'">
+                                <ul>
+                                    <li class="header-menu">
+                                        <span>{{menuItem.groupName | uppercase}}</span>
+                                    </li>
+                                </ul>
+                                <ul *ngFor="let main of menuItem.children">
+                                    <li>
+                                        <a [routerLink]="[main.path]">
+                                            <i class="material-icons">{{main.icon}}</i>
+                                            <span>{{main.title | uppercase}}</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <ul *ngIf="menuItem && menuItem.children && menuItem.groupName !== 'main'" class="nav">
+                                <!-- <li class="header-menu">
+                                    <span>{{menuItem.groupName | uppercase}}</span>
+                                </li> -->
+                                <mat-accordion>
+                                    <mat-expansion-panel style="opacity: 0.7;">
+                                        <mat-expansion-panel-header style="padding-left: 10px">
+                                            <mat-panel-title>
+                                                <mat-icon style="margin-right: 10%;margin-left: 5%;">
+                                                    {{menuItem.icon}}</mat-icon>
+                                                <span
+                                                    style=" font-size: smaller;">{{menuItem.groupName | uppercase}}</span>
+                                            </mat-panel-title>
+                                        </mat-expansion-panel-header>
+                                        <li routerLinkActive="active" *ngFor="let mItem of menuItem.children">
+                                            <a class="myLi" [routerLink]="[mItem.path]">
+                                                <i class="material-icons">{{mItem.icon}}</i>
+                                                <ng-container *ngIf="mItem.title =='price conversion factor' || mItem.title =='variant price master'; 
+                                                        then nameChanged;
+                                                        else sameName">
+                                                </ng-container>
+                                                <ng-template #nameChanged>
+                                                    <div matTooltip="PRICE CONVERSION FACTOR"
+                                                        [matTooltipPosition]="'above'"
+                                                        *ngIf="mItem.title =='price conversion factor'">
+                                                        PCF
+                                                    </div>
+                                                    <div matTooltip="VARIANT PRICE MASTER"
+                                                        [matTooltipPosition]="'above'"
+                                                        *ngIf="mItem.title =='variant price master'">
+                                                        VPM
+                                                    </div>
+                                                </ng-template>
+                                                <ng-template #sameName>
+                                                    <div>
+                                                        {{mItem.title | uppercase}}
+                                                    </div>
+                                                </ng-template>
+                                            </a>
+                                        </li>
+                                    </mat-expansion-panel>
+                                </mat-accordion>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sidebar-footer">
+                <a matTooltip="NOTIFICATION" [matTooltipPosition]="'above'">
+                    <i class="fa fa-bell"></i>
+                    <span class="badge badge-pill badge-warning notification"></span>
+                </a>
+                <a matTooltip="INBOX" [matTooltipPosition]="'above'">
+                    <i class="fa fa-envelope"></i>
+                    <span class="badge badge-pill badge-success notification"></span>
+                </a>
+                <a matTooltip="SETTING" [matTooltipPosition]="'above'">
+                    <i class="fa fa-cog"></i>
+                    <span class="badge-sonar"></span>
+                </a>
+                <a matTooltip="LOGOUT" [matTooltipPosition]="'above'" (click)="logout()">
+                    <i class="fa fa-power-off"></i>
+                </a>
+            </div>
+        </nav>
+    </div>
+</div>

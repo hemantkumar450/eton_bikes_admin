@@ -1,0 +1,41 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-10"></div>
+      <div class="col-md-2">
+        <app-common-button [text]="" (onClick)="onEditUser()" [shouldShow]="true">
+        </app-common-button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-info">
+            <h4 class="card-title">User Table</h4>
+            <p class="card-category"> Get All Users</p>
+          </div>
+          <div class="card-body">
+            <app-common-grid
+              [isActiveFiter]=true
+              [isEdit]="true"
+              [isToggle]="true"
+              [isDelete]="true"
+              [dataSource]="emailTemplates"
+              [displayedColumns]="displayedColumns"
+              [length]="totalRecords"
+              [pageSize]="pageSize" 
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              (onToggle)="onToggleEvent($event)"
+              (onActive)="onActiveEvent($event)"
+              (onFilterReset)="onFilterReset()"
+              (doFiltering)="doFilter($event)"
+              (onSorting)="onSorting($event)"
+              (onPageChanged)="pageChanged($event)"
+              (onEdit)="onEditUser($event)">
+            </app-common-grid>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

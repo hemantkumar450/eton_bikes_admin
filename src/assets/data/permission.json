@@ -1,0 +1,384 @@
+{
+    "data": [{
+            "module_name": "admin",
+            "method": "get",
+            "icon": "admin_panel_settings",
+            "group": "admin management",
+            "description": "get the list",
+            "template_route": "/admin",
+            "backend_route": "/admins",
+            "key": "shouldGet"
+        },
+        {
+            "module_name": "admin",
+            "method": "post",
+            "icon": "admin_panel_settings",
+            "group": "admin management",
+            "description": "get the list",
+            "template_route": "/admin",
+            "backend_route": "/admins",
+            "key": "shouldAdd"
+        },
+        {
+            "module_name": "admin",
+            "method": "put",
+            "icon": "admin_panel_settings",
+            "group": "admin management",
+            "description": "get the list",
+            "template_route": "/admin",
+            "backend_route": "/admin/:id",
+            "key": "shouldEdit"
+        },
+        {
+            "module_name": "admin",
+            "method": "delete",
+            "icon": "admin_panel_settings",
+            "group": "admin management",
+            "description": "get the list",
+            "template_route": "/admin",
+            "backend_route": "/admin",
+            "key": "shouldDelete"
+        },
+        {
+            "module_name": "admin",
+            "method": "get",
+            "icon": "admin_panel_settings",
+            "group": "admin management",
+            "description": "get the list",
+            "template_route": "/admin",
+            "backend_route": "/admin/:id",
+            "key": "shouldView"
+        },
+        {
+            "module_name": "admin",
+            "method": "get",
+            "icon": "admin_panel_settings",
+            "group": "admin management",
+            "description": "get the list",
+            "template_route": "/admin",
+            "backend_route": "/admin/:id",
+            "key": "shouldToggle"
+        },
+        {
+            "module_name": "booking",
+            "method": "get",
+            "icon": "content_paste",
+            "group": "user management",
+            "description": "get the list",
+            "template_route": "/booking",
+            "backend_route": "/bookings",
+            "key": "shouldGet"
+        },
+        {
+            "module_name": "booking",
+            "method": "post",
+            "icon": "content_paste",
+            "group": "user management",
+            "description": "Add booking",
+            "backend_route": "/booking",
+            "template_route": "/booking",
+            "key": "shouldAdd"
+        },
+        {
+            "module_name": "booking",
+            "method": "get",
+            "icon": "content_paste",
+            "group": "user management",
+            "description": "booking view by id",
+            "backend_route": "/booking/:id",
+            "template_route": "/booking",
+            "key": "shouldView"
+        },
+        {
+            "module_name": "booking",
+            "method": "put",
+            "icon": "content_paste",
+            "group": "user management",
+            "description": "edit the booking by id",
+            "backend_route": "/booking/:id",
+            "template_route": "/booking",
+            "key": "shouldEdit"
+        },
+        {
+            "module_name": "booking",
+            "method": "post",
+            "icon": "content_paste",
+            "group": "user management",
+            "description": "change status by booking Id",
+            "backend_route": "/booking",
+            "template_route": "/booking",
+            "key": "shouldStatusChange"
+        },
+        {
+            "module_name": "booking",
+            "method": "delete",
+            "icon": "content_paste",
+            "group": "user management",
+            "description": "booking Delete by booking Id",
+            "backend_route": "/booking",
+            "template_route": "/booking",
+            "key": "shouldDelete"
+        },
+        {
+            "module_name": "booking",
+            "method": "get",
+            "icon": "content_paste",
+            "group": "user management",
+            "description": "booking row active/deactive",
+            "backend_route": "/booking/:id",
+            "template_route": "/booking",
+            "key": "shouldToggle"
+        },
+        {
+            "module_name": "user",
+            "method": "get",
+            "icon": "content_paste",
+            "group": "user management",
+            "description": "get the list",
+            "template_route": "/user",
+            "backend_route": "/users",
+            "key": "shouldGet"
+        },
+        {
+            "module_name": "user",
+            "method": "post",
+            "icon": "content_paste",
+            "group": "user management",
+            "description": "Add User",
+            "backend_route": "/user",
+            "template_route": "/user",
+            "key": "shouldAdd"
+        },
+        {
+            "module_name": "user",
+            "method": "get",
+            "icon": "content_paste",
+            "group": "user management",
+            "description": "user view by id",
+            "backend_route": "/user/:id",
+            "template_route": "/user",
+            "key": "shouldView"
+        },
+        {
+            "module_name": "user",
+            "method": "put",
+            "icon": "content_paste",
+            "group": "user management",
+            "description": "edit the user by id",
+            "backend_route": "/user/:id",
+            "template_route": "/user",
+            "key": "shouldEdit"
+        },
+        {
+            "module_name": "user",
+            "method": "post",
+            "icon": "content_paste",
+            "group": "user management",
+            "description": "change status by user Id",
+            "backend_route": "/user",
+            "template_route": "/user",
+            "key": "shouldStatusChange"
+        },
+        {
+            "module_name": "user",
+            "method": "delete",
+            "icon": "content_paste",
+            "group": "user management",
+            "description": "user Delete by User Id",
+            "backend_route": "/user",
+            "template_route": "/user",
+            "key": "shouldDelete"
+        },
+        {
+            "module_name": "user",
+            "method": "get",
+            "icon": "content_paste",
+            "group": "user management",
+            "description": "user row active/deactive",
+            "backend_route": "/user/:id",
+            "template_route": "/user",
+            "key": "shouldToggle"
+        },
+        {
+            "module_name": "home",
+            "method": "get",
+            "icon": "directions_car",
+            "group": "master management",
+            "description": "get home list",
+            "backend_route": "/home",
+            "template_route": "/home",
+            "key": "shouldGet"
+        },
+        {
+            "module_name": "home",
+            "method": "put",
+            "icon": "directions_car",
+            "group": "master management",
+            "description": "",
+            "backend_route": "/home/:id",
+            "template_route": "/home",
+            "key": "shouldEdit"
+        },
+        {
+            "module_name": "home",
+            "method": "post",
+            "icon": "directions_car",
+            "group": "master management",
+            "description": "get home list",
+            "backend_route": "/home",
+            "template_route": "/home",
+            "key": "shouldAdd"
+        },
+        {
+            "module_name": "home",
+            "method": "get",
+            "icon": "directions_car",
+            "group": "master management",
+            "description": "get home list",
+            "backend_route": "/home/:id",
+            "template_route": "/home",
+            "key": "shouldView"
+        },
+        {
+            "module_name": "home",
+            "method": "delete",
+            "icon": "directions_car",
+            "group": "master management",
+            "description": "get home list",
+            "backend_route": "/home",
+            "template_route": "/home",
+            "key": "shouldDelete"
+        },
+        {
+            "module_name": "home",
+            "method": "get",
+            "icon": "directions_car",
+            "group": "master management",
+            "description": "get home list",
+            "backend_route": "/home/:id",
+            "template_route": "/home",
+            "key": "shouldStatusChange"
+        },
+        {
+            "module_name": "product",
+            "method": "get",
+            "icon": "directions_car",
+            "group": "master management",
+            "description": "get product list",
+            "backend_route": "/product",
+            "template_route": "/product",
+            "key": "shouldGet"
+        },
+        {
+            "module_name": "product",
+            "method": "put",
+            "icon": "directions_car",
+            "group": "master management",
+            "description": "",
+            "backend_route": "/product/:id",
+            "template_route": "/product",
+            "key": "shouldEdit"
+        },
+        {
+            "module_name": "product",
+            "method": "post",
+            "icon": "directions_car",
+            "group": "master management",
+            "description": "get product list",
+            "backend_route": "/product",
+            "template_route": "/product",
+            "key": "shouldAdd"
+        },
+        {
+            "module_name": "product",
+            "method": "get",
+            "icon": "directions_car",
+            "group": "master management",
+            "description": "get product list",
+            "backend_route": "/product/:id",
+            "template_route": "/product",
+            "key": "shouldView"
+        },
+        {
+            "module_name": "product",
+            "method": "delete",
+            "icon": "directions_car",
+            "group": "master management",
+            "description": "get product list",
+            "backend_route": "/product",
+            "template_route": "/product",
+            "key": "shouldDelete"
+        },
+        {
+            "module_name": "product",
+            "method": "get",
+            "icon": "directions_car",
+            "group": "master management",
+            "description": "get product list",
+            "backend_route": "/product/:id",
+            "template_route": "/product",
+            "key": "shouldStatusChange"
+        },
+        {
+            "module_name": "dashboard",
+            "method": "get",
+            "icon": "content_paste",
+            "group": "main",
+            "description": "get dashboard list",
+            "backend_route": "/dashboard",
+            "template_route": "/dashboard",
+            "key": "shouldGet"
+        },
+        {
+            "module_name": "dashboard",
+            "method": "put",
+            "icon": "content_paste",
+            "group": "main",
+            "description": "get dashboard list",
+            "backend_route": "/dashboard",
+            "template_route": "/dashboard",
+            "key": "shouldEdit"
+        },
+        {
+            "module_name": "dashboard",
+            "method": "post",
+            "icon": "content_paste",
+            "group": "main",
+            "description": "get dashboard list",
+            "backend_route": "/dashboard",
+            "template_route": "/dashboard",
+            "key": "shouldAdd"
+        },
+        {
+            "module_name": "dashboard",
+            "method": "get",
+            "icon": "content_paste",
+            "group": "main",
+            "description": "get dashboard list",
+            "backend_route": "/dashboard",
+            "template_route": "/dashboard",
+            "key": "shouldView"
+        },
+        {
+            "module_name": "dashboard",
+            "method": "delete",
+            "icon": "content_paste",
+            "group": "main",
+            "description": "get dashboard list",
+            "backend_route": "/dashboard",
+            "template_route": "/dashboard",
+            "key": "shouldDelete"
+        },
+        {
+            "module_name": "dashboard",
+            "method": "post",
+            "icon": "content_paste",
+            "group": "main",
+            "description": "get dashboard list",
+            "backend_route": "/dashboard",
+            "template_route": "/dashboard",
+            "key": "shouldToggle"
+        }
+
+    ]
+}

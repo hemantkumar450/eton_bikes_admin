@@ -1,0 +1,49 @@
+<div class="container" id="container" #container>
+    <div class="form-container sign-up-container">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" style="padding:0 10% 0 10% ;">
+            <h1>SIGN UP</h1>
+            <input type="text" placeholder="Name" />
+            <input type="email" placeholder="Email" />
+            <input type="password" placeholder="Password" />
+            <button type="button" (click)="signInEvent()">Sign Up</button>
+        </form>
+    </div>
+    <div class="form-container sign-in-container">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" style="padding:0 10% 0 10% ;">
+            <h1>SIGN IN</h1>
+            <input type="text" formControlName="username" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.username.errors }" placeholder="User Name" />
+            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                <div *ngIf="f.username.errors.required">Username is required</div>
+            </div>
+            <input type="password" formControlName="password" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Password" />
+            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required">Password is required</div>
+            </div>
+            <a href="#">Forgot your password?</a>
+            <button>Sign In</button>
+        </form>
+    </div>
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-left">
+                <h1>Welcome Back!</h1>
+                <p>To keep connected with us please login with your personal info</p>
+                <button class="ghost" type="button" (click)="signInEvent()">Sign In</button>
+            </div>
+            <div class="overlay-panel overlay-right">
+                <h1>Hello, Friend!</h1>
+                <p>Enter your personal details and start journey with us</p>
+                <button class="ghost" type="button" (click)="signUpEvent()">Sign Up</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>
+        Created with <i class="fa fa-heart"></i> by
+        <a target="_blank" href="https://t9l.com">T9L</a>
+    </p>
+</footer>

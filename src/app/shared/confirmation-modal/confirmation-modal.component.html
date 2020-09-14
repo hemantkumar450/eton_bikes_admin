@@ -1,0 +1,12 @@
+<div *ngIf="!data.isImageUpload">
+  <div [innerHTML]="data.html"></div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onCancel()" class="btn btn-danger pull-right">{{data.noButtonText}}</button>
+    <button class="btn btn-info pull-right" mat-button [mat-dialog-close]="data"
+      cdkFocusInitial>{{data.yesButtonText}}</button>
+  </div>
+</div>
+<div *ngIf="data.isImageUpload">
+  <app-image-cropper [param]="data.image" [target]="data.targetUrl" (complete)="onFileComplete($event)">
+  </app-image-cropper>
+</div>

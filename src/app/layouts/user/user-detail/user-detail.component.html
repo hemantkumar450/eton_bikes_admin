@@ -1,0 +1,132 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <h4 class="card-title" *ngIf="!user._id">Add User Detail</h4>
+                        <h4 class="card-title" *ngIf="user._id">Edit User Detail</h4>
+                        <p class="card-category">Complete your User Details</p>
+                    </div>
+                    <div class="card-body">
+                        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                            <div>
+                                <mat-tab-group mat-align-tabs="center">
+                                    <mat-tab label="Basic Details">
+                                        <div class="row" style="width: 100%; padding:10px 10px">
+                                            <div class="col-md-3">
+                                                <mat-form-field class="example-full-width">
+                                                    <input matInput placeholder="Name" [(ngModel)]="user.name"
+                                                        name="conamede" #name="ngModel" required>
+                                                    <mat-error *ngIf="f.submitted && name.invalid">
+                                                        Name is <strong>required</strong>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <mat-form-field class="example-full-width">
+                                                    <input type="email" matInput placeholder="Email" name="email"
+                                                        [(ngModel)]="user.email" email="true">
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <mat-form-field>
+                                                    <mat-label>Work Email</mat-label>
+                                                    <input name="work_email" matInput #work_email="ngModel"
+                                                        [(ngModel)]="user.work_email" required>
+                                                    <mat-error *ngIf="f.submitted && work_email.invalid">
+                                                        Work Email Number is <strong>required</strong>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" style="width: 100%; padding:10px 10px">
+                                            <div class="col-md-3">
+                                                <mat-form-field>
+                                                    <mat-label>Mobile Number</mat-label>
+                                                    <input (keypress)="checkDigit('mobile')" name="mobile" matInput
+                                                        maxlength="10" #mobile="ngModel" [(ngModel)]="user.mobile"
+                                                        required>
+                                                    <mat-error *ngIf="f.submitted && mobile.invalid">
+                                                        Valid Mobile Number is <strong>required</strong>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <mat-form-field class="example-full-width">
+                                                    <input type="email" matInput placeholder="Pan Number"
+                                                        name="pan_number" #pan_number="ngModel"
+                                                        [(ngModel)]="user.pan_number" required>
+                                                    <mat-error *ngIf="f.submitted && pan_number.invalid">
+                                                        Pan Number is <strong>required</strong>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <mat-form-field>
+                                                    <mat-label>ctc</mat-label>
+                                                    <input (keypress)="checkDigit('ctc')" name="ctc" matInput
+                                                        maxlength="10" #ctc="ngModel" [(ngModel)]="user.ctc" required>
+                                                    <mat-error *ngIf="f.submitted && ctc.invalid">
+                                                        ctc is <strong>required</strong>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <mat-form-field>
+                                                    <mat-label>Max Eligibility</mat-label>
+                                                    <input (keypress)="checkDigit('max_eligibility')"
+                                                        name="Max Eligibility" matInput maxlength="10"
+                                                        #max_eligibility="ngModel" [(ngModel)]="user.max_eligibility">
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <p class="click-here-box">Please check the list of <span
+                                                class="click-here-span"> Verified or Not Verified</span> Steps
+                                        </p>
+                                        <div style="width: 100%; padding:10px 10px" class="row"
+                                            *ngFor="let doc of verificationStatusList">
+                                            <div class="col-md-3">
+                                                {{doc | uppercase}}
+                                            </div>
+                                            <div class="col-md-2">
+                                                <span *ngIf="user.is_verified[doc]" class="verified">Verified</span>
+                                                <span *ngIf="!user.is_verified[doc]" class="not-verified">Not
+                                                    Verified</span>
+                                            </div>
+                                            <div class="col-md-2" *ngIf="doc == 'email' && !user.is_verified['email']">
+                                                <button mat-icon-button type="button"
+                                                    class="btn btn-info btn-link btn-sm btn-just-icon"
+                                                    [matTooltipPosition]="'above'" matTooltip="Resend Verification
+                                                    Link" (click)="onEmailVerification()">
+                                                    <mat-icon class="mat-18">email</mat-icon>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <button mat-raised-button class="btn btn-info pull-right"
+                                            type="submit">Save</button>
+                                        <button mat-raised-button class="btn btn-info pull-right" type="button"
+                                            (click)="cancel()">Cancel</button>
+                                        <button mat-raised-button class="btn btn-default pull-right" type="button"
+                                            *ngIf="shouldShowDownload" (click)="downloadReport()">View
+                                            Report</button>
+                                        <div class="clearfix"></div>
+                                    </mat-tab>
+                                    <mat-tab *ngIf="permission.shouldShowDocumentTab" label="Document Details">
+                                        <app-user-documentation *ngIf="user.documents.length"
+                                            [uploadDocumentList]="user.documents"></app-user-documentation>
+                                    </mat-tab>
+                                    <mat-tab *ngIf="permission.shouldShowTransactionTab" label="Transaction Details">
+                                        <app-user-transaction *ngIf="user._id" [userId]="user._id">
+                                        </app-user-transaction>
+                                    </mat-tab>
+                                </mat-tab-group>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

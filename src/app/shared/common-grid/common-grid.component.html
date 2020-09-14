@@ -1,0 +1,143 @@
+<div class="row">
+    <div class="col-md-2" *ngIf="!searchDisabled">
+        <div fxLayout fxLayoutAlign="center center">
+            <mat-form-field fxFlex="40%">
+                <input matInput autocomplete="off" type="text" (keyup)="doFilterEvent($event.target.value)"
+                    placeholder="Search">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="col-md-2" *ngIf="isBrandFilter">
+        <div fxLayout fxLayoutAlign="center center">
+            <mat-form-field class="example-full-width">
+                <mat-select [(ngModel)]="brandId" placeholder="Filter with Brand"
+                    (selectionChange)="onBrandFilter($event)" name="city">
+                    <mat-option *ngFor="let brand of brands" [value]="brand._id">
+                        {{brand.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="col-md-2" *ngIf="isModelFilter">
+        <div fxLayout fxLayoutAlign="center center">
+            <mat-form-field class="example-full-width">
+                <mat-select [(ngModel)]="modelId" placeholder="Filter with Model"
+                    (selectionChange)="onModelFilter($event)" name="city">
+                    <mat-option *ngFor="let model of models" [value]="model._id">
+                        {{model.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="col-md-2" *ngIf="isActiveFiter">
+        <div fxLayout fxLayoutAlign="center center">
+            <mat-form-field class="example-full-width">
+                <mat-select [(ngModel)]="modelId" placeholder="Active/Inactive"
+                    (selectionChange)="onActiveFilter($event)" name="active">
+                    <mat-option *ngFor="let option of options" [value]="option.value">
+                        {{option.label}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="col-md-2" *ngIf="isModelFilter || isBrandFilter ||  isActiveFiter">
+        <button class="btn btn-info " mat-raised-button (click)="onFilterChanged()">
+            <i class="material-icons">note_add</i> Reset Filters</button>
+    </div>
+</div>
+
+<table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortChangeEvent($event)">
+
+    <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>
+            <span *ngIf="column === 'edit' && isEdit">{{this.titleCase(column)}}</span>
+            <span *ngIf="column === 'delete' && isDelete">{{this.titleCase(column)}}</span>
+            <span *ngIf="column === 'toggle' && isToggle">STATUS</span>
+            <span *ngIf="column === 'view' && isView">{{this.titleCase(column)}}</span>
+            <span *ngIf="column === 'changeStatus' && isStatusChange">ACTION</span>
+            <span *ngIf="column === 'length'">LENGTH (MM)</span>
+            <span *ngIf="column === 'displacement'">DISPLACEMENT (CC)</span>
+            <span *ngIf="column !== 'edit' && 
+                        column !== 'delete' && 
+                        column !== 'view' && 
+                        column !== 'changeStatus' &&
+                        column !== 'toggle' &&
+                        column !=='length' &&
+                        column !=='displacement'">{{this.titleCase(column) }}</span>
+        </th>
+        <td mat-cell *matCellDef="let element">
+            <span *ngIf="column === 'icon'">
+                <mat-icon class="mat-18">{{element[column]}}</mat-icon>
+            </span>
+            <span *ngIf="column === 'permission_grant_count'">
+                {{element['permissions'].length}}
+            </span>
+            <span *ngIf="column === 'view' && isView">
+                <button mat-icon-button class="btn btn-info btn-link btn-sm btn-just-icon"
+                    [matTooltipPosition]="'above'" matTooltip="View" (click)="onViewEvent(element)">
+                    <mat-icon class="mat-18">visibility</mat-icon>
+                </button>
+            </span>
+            <span *ngIf="column === 'edit' && isEdit">
+                <button mat-icon-button class="btn btn-info btn-link btn-sm btn-just-icon"
+                    [matTooltipPosition]="'above'" matTooltip="Edit" (click)="onEditEvent(element)">
+                    <mat-icon class="mat-18">edit</mat-icon>
+                </button>
+            </span>
+            <span *ngIf="column === 'delete' && isDelete">
+                <button mat-icon-button color="warn" matTooltip="Remove" [matTooltipPosition]="'above'"
+                    (click)="onDeleteEvent(element)">
+                    <mat-icon class="mat-18">delete</mat-icon>
+                </button>
+            </span>
+            <span *ngIf="column === 'toggle' && isToggle">
+                <section class="example-section">
+                    <mat-slide-toggle [matTooltipPosition]="'above'" matTooltip="Active/Inactive" class="example-margin"
+                        (change)="onToggleEvent(element)" [checked]="element.active">
+                    </mat-slide-toggle>
+                </section>
+            </span>
+            <span *ngIf="column === 'changeStatus' && isStatusChange">
+                <button mat-icon-button color="warn" matTooltip="Status Change" [matTooltipPosition]="'above'"
+                    (click)="onStatusChangeEvent(element)">
+                    <mat-icon class="mat-18">tune</mat-icon>
+                </button>
+            </span>
+            <span *ngIf="column !== 'permission_grant_count' &&
+                column !== 'icon' &&
+                column !== 'edit' &&
+                column !== 'delete' &&
+                column !== 'view' &&
+                column !== 'changeStatus' &&
+                column !== 'toggle'">
+                <ng-container *ngIf="isObject(element[column]); then object; else string">
+                </ng-container>
+                <ng-template #string>
+                    <span *ngIf="column == 'Is Procured' || column === 'Should List'">
+                        {{element[column] || 'No Detail Available'}}
+                    </span>
+                    <span>
+                        {{element[column] || 'No Detail Available'}}
+                    </span>
+                </ng-template>
+                <ng-template #object>
+                    <span> {{element[column].name }} </span>
+                    <span *ngIf="column === 'length' || column === 'displacement'">
+                        Min: <b>{{element[column].min }}</b>
+                        Max: <b>{{element[column].max }}</b>
+                    </span>
+                </ng-template>
+            </span>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
+<mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+    (page)="pageChangeEvent($event)">
+</mat-paginator>
