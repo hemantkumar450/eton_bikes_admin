@@ -113,14 +113,14 @@
                                             Report</button>
                                         <div class="clearfix"></div>
                                     </mat-tab>
-                                    <mat-tab *ngIf="permission.shouldShowDocumentTab" label="Document Details">
+                                    <!-- <mat-tab *ngIf="permission.shouldShowDocumentTab" label="Document Details">
                                         <app-user-documentation *ngIf="user.documents.length"
                                             [uploadDocumentList]="user.documents"></app-user-documentation>
                                     </mat-tab>
                                     <mat-tab *ngIf="permission.shouldShowTransactionTab" label="Transaction Details">
                                         <app-user-transaction *ngIf="user._id" [userId]="user._id">
                                         </app-user-transaction>
-                                    </mat-tab>
+                                    </mat-tab> -->
                                 </mat-tab-group>
                             </div>
                         </form>

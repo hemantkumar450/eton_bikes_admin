@@ -16,6 +16,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatTableModule } from "@angular/material/table";
 import { MatSelectModule } from "@angular/material/select";
+import { MatTabsModule } from "@angular/material/tabs";
 
 // import { TreeModule } from "primeng/tree";
 // import { ToastModule } from "primeng/toast";
@@ -54,6 +55,7 @@ const sharedModule = [
   MatPaginatorModule,
   MatTableModule,
   MatSelectModule,
+  MatTabsModule,
   // TableModule,
   // DropdownModule,
   // ButtonModule,
