@@ -1,0 +1,34 @@
+<div [innerHtml]="data.html"></div>
+<div class="row">
+  <div class="col-md-4">
+    <mat-form-field class="example-full-width">
+      <input matInput [(ngModel)]="data.response.name" placeholder="name">
+    </mat-form-field>
+  </div>
+
+</div>
+<div class="row">
+  <div class="col-md-4" *ngIf="data.response.category == 'build_spec'">
+    <mat-form-field class="example-full-width">
+      <mat-select [(ngModel)]="data.response.order" placeholder="Select Orders" name=" order">
+        <mat-option *ngFor="let order of orders" [value]="order">
+          {{order | uppercase}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-md-6">
+    <mat-form-field class="example-full-width">
+      <mat-select [(ngModel)]="data.response.category" placeholder="Select Category" name=" category">
+        <mat-option *ngFor="let category of categories" [value]="category">
+          {{category | uppercase}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()" class="btn btn-danger pull-right">{{data.noButtonText}}</button>
+  <button class="btn btn-info pull-right" mat-button [mat-dialog-close]="data"
+    cdkFocusInitial>{{data.yesButtonText}}</button>
+</div>

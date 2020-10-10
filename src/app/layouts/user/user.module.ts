@@ -5,16 +5,10 @@ import { UserDetailComponent } from "./user-detail/user-detail.component";
 import { UserGridComponent } from "./user-grid/user-grid.component";
 import { routing } from "./user.routing";
 import { SharedComponentModule } from "app/shared/shared.module";
-import { ReportPopupComponent } from "./user-detail/report-popup/report-popup.component";
 
 @NgModule({
   imports: [routing, SharedComponentModule, CommonModule],
-  declarations: [
-    UserDetailComponent,
-    UserComponent,
-    UserGridComponent,
-    ReportPopupComponent,
-  ],
-  entryComponents: [ReportPopupComponent],
+  declarations: [UserDetailComponent, UserComponent, UserGridComponent],
+  entryComponents: [],
 })
 export class UserModule {}

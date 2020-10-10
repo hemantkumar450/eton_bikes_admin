@@ -1,8 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ElementRef,
-} from "@angular/core";
+import { Component, OnInit, ElementRef } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { AuthService } from "../auth.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -61,9 +57,9 @@ export class LoginComponent implements OnInit {
       email: this.loginForm.get("username").value,
     };
 
-    // this.authService.login(login).subscribe(() => {
+    this.authService.login(login).subscribe(() => {
       this.router.navigate([""]);
-    // });
+    });
   }
 
   signInEvent() {

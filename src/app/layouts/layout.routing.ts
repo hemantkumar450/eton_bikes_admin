@@ -9,9 +9,8 @@ export const LayoutRoutes: Routes = [
       import("./dashboard/dashboard.module").then((mod) => mod.DashboardModule),
   },
   {
-    path: "user",
+    path: "key",
     canActivate: [AuthGuard],
-    loadChildren: () =>
-      import("./user/user.module").then((mod) => mod.UserModule),
+    loadChildren: () => import("./key/key.module").then((mod) => mod.KeyModule),
   },
 ];

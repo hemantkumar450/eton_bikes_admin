@@ -25,10 +25,10 @@ export class TokenErrorInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     const token = this.authService.getToken();
     let newHeaders = req.headers;
-    if (token) {
+    if (!token) {
       this.router.navigate(["/auth/login"]);
     }
-    newHeaders = newHeaders.append("token", token);
+    newHeaders = newHeaders.append("Authorization", `Bearer ${token}`);
     const authReq = req.clone({ headers: newHeaders });
     return next.handle(authReq);
   }

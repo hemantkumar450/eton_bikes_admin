@@ -1,0 +1,47 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-10"></div>
+      <div class="col-md-2">
+        <app-common-button 
+          [text]=""
+          (onClick)="openDialog()"
+          [shouldShow]="permission.shouldAdd">
+        </app-common-button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-info">
+            <h4 class="card-title">Key Table</h4>
+            <p class="card-category"> Get All Keys</p>
+          </div>
+          <div class="card-body">
+            <app-common-grid
+              [isEdit]="permission.shouldEdit"
+              [isToggle]="permission.shouldToggle"
+              [isDelete]="permission.shouldDelete"
+              [isActiveFiter]="permission.shouldToggle"
+              [dataSource]="keys" 
+              (onSorting)="onSorting($event)"
+              [displayedColumns]="displayedColumns"
+              [length]="totalRecords" 
+              [pageSize]="pageSize" 
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              (onPageChanged)="pageChanged($event)"
+              (onDelete)="deleteKey($event)"
+              (onEdit)="openDialog($event)"
+              (onToggle)="onToggleEvent($event)"
+              (onActive)="onActiveEvent($event)"
+              (onSorting)="onSorting($event)"
+              (doFiltering)="doFilter($event)"
+              (onFilterReset)="onFilterReset()"
+            >
+            </app-common-grid>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

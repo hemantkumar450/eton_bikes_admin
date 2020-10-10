@@ -260,6 +260,66 @@
             "key": "shouldStatusChange"
         },
         {
+            "module_name": "key",
+            "method": "get",
+            "icon": "directions_car",
+            "group": "master management",
+            "description": "get key list",
+            "backend_route": "/key",
+            "template_route": "/key",
+            "key": "shouldGet"
+        },
+        {
+            "module_name": "key",
+            "method": "put",
+            "icon": "directions_car",
+            "group": "master management",
+            "description": "",
+            "backend_route": "/key/:id",
+            "template_route": "/key",
+            "key": "shouldEdit"
+        },
+        {
+            "module_name": "key",
+            "method": "post",
+            "icon": "directions_car",
+            "group": "master management",
+            "description": "get key list",
+            "backend_route": "/key",
+            "template_route": "/key",
+            "key": "shouldAdd"
+        },
+        {
+            "module_name": "key",
+            "method": "get",
+            "icon": "directions_car",
+            "group": "master management",
+            "description": "get key list",
+            "backend_route": "/key/:id",
+            "template_route": "/key",
+            "key": "shouldView"
+        },
+        {
+            "module_name": "key",
+            "method": "delete",
+            "icon": "directions_car",
+            "group": "master management",
+            "description": "get key list",
+            "backend_route": "/key",
+            "template_route": "/key",
+            "key": "shouldDelete"
+        },
+        {
+            "module_name": "key",
+            "method": "get",
+            "icon": "directions_car",
+            "group": "master management",
+            "description": "get key list",
+            "backend_route": "/key/:id",
+            "template_route": "/key",
+            "key": "shouldStatusChange"
+        },
+        {
             "module_name": "product",
             "method": "get",
             "icon": "directions_car",
