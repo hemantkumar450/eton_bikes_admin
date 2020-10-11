@@ -1,0 +1,377 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-info">
+            <h4 class="card-title" *ngIf="!product._id">Add Product</h4>
+            <h4 class="card-title" *ngIf="product._id">Edit Product</h4>
+            <p class="card-category">Complete your Product details</p>
+          </div>
+          <div class="card-body">
+            <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+              <div class="row">
+                <div class="col-md-7">
+                  <div class="row">
+                    <div class="col-md-5">
+
+                    </div>
+                    <div class="col-md-5">
+
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <mat-form-field>
+                        <input matInput type="text" name="name" [(ngModel)]="product.name" #name="ngModel"
+                          placeholder="Name" required>
+                        <mat-error *ngIf="f.submitted && name.invalid">
+                          Name is <strong>required</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                      <mat-form-field>
+                        <input matInput type="text" name="title" [(ngModel)]="product.title" #title="ngModel"
+                          placeholder="title" required>
+                        <mat-error *ngIf="f.submitted && title.invalid">
+                          Title is <strong>required</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row" *ngIf="product._id">
+                    <div class="col-md-10">
+                      <mat-form-field>
+                        <input matInput type="text" name="slug" [(ngModel)]="product.slug" placeholder="Slug" readonly>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <mat-form-field>
+                    <textarea style="height: 100px;" matInput [(ngModel)]="product.description" name="description"
+                      placeholder="Description" cdkTextareaAutosize cdkAutosizeMinRows=7
+                      cdkAutosizeMaxRows=20></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <h3>Features</h3>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field>
+                    <mat-select [(ngModel)]="feature.key" name="featureKey" #featureKey="ngModel"
+                      placeholder="Select a feature">
+                      <mat-option *ngFor="let feature of features" [value]="feature.name">
+                        {{feature.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field>
+                    <input matInput type="text" name="feature.value" [(ngModel)]="feature.value" placeholder="Value">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-2">
+                  <button type="button btn-secondary" type="button" mat-icon-button (click)="addFeature()">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+              </div>
+
+              <div *ngFor="let feature of product.features; let index=index">
+                <div class="row">
+                  <div class="col-md-4">{{feature.key}}</div>
+                  <div class="col-md-4">{{feature.value}}</div>
+                  <div class="col-md-2">
+                    <button type="button btn-secondary" type="button" mat-icon-button (click)="deleteFeature(index)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-md-4">
+                  <h3>Media Display</h3>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field>
+                    <mat-select [(ngModel)]="displayMedia.category" name="featureKey" #featureKey="ngModel"
+                      placeholder="Select a feature">
+                      <mat-option *ngFor="let cat of mediaCategories" [value]="cat">
+                        {{cat | uppercase}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field>
+                    <input matInput type="text" name="feature.value" [(ngModel)]="displayMedia.url" placeholder="Value">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-2">
+                  <button type="button btn-secondary" type="button" mat-icon-button (click)="addDisplayMedia()">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+              </div>
+
+              <div *ngFor="let media_url of product.media_urls; let index=index">
+                <div class="row">
+                  <div class="col-md-4">{{media_url.category | uppercase}}</div>
+                  <div class="col-md-4">{{media_url.url}}</div>
+                  <div class="col-md-2">
+                    <button type="button btn-secondary" type="button" mat-icon-button
+                      (click)="deleteDisplayMedia(index)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-md-4">
+                  <h3>Tech Support</h3>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                  <mat-tab-group mat-align-tabs="center" (selectedTabChange)="selectedTabChange($event)">
+                    <mat-tab label="FAQS">
+                      <div class="row marginZero">
+                        <div class="col-md-5">
+                          <mat-form-field>
+                            <textarea style="height: 50px;" matInput [(ngModel)]="faqs.key" name="faqs.key"
+                              placeholder="Question" cdkTextareaAutosize cdkAutosizeMinRows=7
+                              cdkAutosizeMaxRows=20></textarea>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-5">
+                          <mat-form-field>
+                            <textarea style="height: 50px;" matInput [(ngModel)]="faqs.value" name="faqs.value"
+                              placeholder="Answer" cdkTextareaAutosize cdkAutosizeMinRows=7
+                              cdkAutosizeMaxRows=20></textarea>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-2">
+                          <button type="button btn-secondary" type="button" mat-icon-button (click)="addFaqs()">
+                            <mat-icon>add</mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="row marginZero" *ngIf="product.tech_support.faqs.length">
+                        <div class="col-md-5"> <strong>Questions</strong> </div>
+                        <div class="col-md-5"> <strong>Answers</strong></div>
+                      </div>
+                      <div class="row marginZero" *ngFor="let faq of product.tech_support.faqs;let index=index">
+                        <div class="col-md-5"> {{faq.key}}</div>
+                        <div class="col-md-5"> {{faq.value}}</div>
+                        <div class="col-md-2">
+                          <button type="button btn-secondary" type="button" mat-icon-button (click)="deleteFaqs(index)">
+                            <mat-icon>delete</mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </mat-tab>
+                    <mat-tab label="Components">
+                      <div class="row marginZero">
+                        <div class="col-md-5">
+                          <mat-form-field>
+                            <textarea style="height: 50px;" matInput [(ngModel)]="component.key" name="component.key"
+                              placeholder="Name" cdkTextareaAutosize cdkAutosizeMinRows=7
+                              cdkAutosizeMaxRows=20></textarea>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-5">
+                          <mat-form-field>
+                            <textarea style="height: 50px;" matInput [(ngModel)]="component.value"
+                              name="component.value" placeholder="Value" cdkTextareaAutosize cdkAutosizeMinRows=7
+                              cdkAutosizeMaxRows=20></textarea>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-2">
+                          <button type="button btn-secondary" type="button" mat-icon-button (click)="addComponent()">
+                            <mat-icon>add</mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="row marginZero" *ngIf="product.tech_support.components.length">
+                        <div class="col-md-5"> <strong>Component Names</strong> </div>
+                        <div class="col-md-5"> <strong>Component Values</strong></div>
+                      </div>
+                      <div class="row marginZero"
+                        *ngFor="let component of product.tech_support.components;let index=index">
+                        <div class="col-md-5"> {{component.key}}</div>
+                        <div class="col-md-5"> {{component.value}}</div>
+                        <div class="col-md-2">
+                          <button type="button btn-secondary" type="button" mat-icon-button
+                            (click)="deleteComponent(index)">
+                            <mat-icon>delete</mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </mat-tab>
+                    <mat-tab label="Warranty & Registration">
+                      <ckeditor *ngIf="shouldShowEditor" [(ngModel)]="product.tech_support.warranty_and_registration"
+                        #myckeditor="ngModel" name="myckeditor" [config]="ckeConfig" debounce="500">
+                      </ckeditor>
+                    </mat-tab>
+                  </mat-tab-group>
+                </div>
+                <div class="col-md-1"></div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <h3>Close Up media</h3>
+                </div>
+                <div class="col-md-4 marginTop2">
+                  <app-file-uploader [param]="{}" [target]="targetUrl" (complete)="onFileComplete($event, 'close_up')">
+                  </app-file-uploader>
+                </div>
+              </div>
+
+              <div>
+                <div class="row" style="border: 1px solid #e1e1e1; padding:20px">
+                  <div class="col-md-4" *ngFor="let close_up of product.close_up_media;let index= index">
+                    <img src="./assets/img/user_profile.png" style="width:50%">
+                    <button type="button btn-secondary" type="button" mat-icon-button
+                      (click)="deleteImage(index, 'close_up')">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <h3>Long Shot media</h3>
+                </div>
+                <div class="col-md-4 marginTop2">
+                  <app-file-uploader [param]="{}" [target]="targetUrl" (complete)="onFileComplete($event, 'long_shot')">
+                  </app-file-uploader>
+                </div>
+              </div>
+
+              <div>
+                <div class="row" style="border: 1px solid #e1e1e1; padding:20px">
+                  <div class="col-md-4" *ngFor="let long_shot of product.long_shot_media;let index= index">
+                    <img src="./assets/img/user_profile.png" style="width:50%">
+                    <button type="button btn-secondary" type="button" mat-icon-button
+                      (click)="deleteImage(index, 'long_shot')">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <h3>Geometry</h3>
+                </div>
+              </div>
+
+              <!-- <div class="row">
+                  <div class="col-md-3">
+                      <mat-form-field #selectAfterAdding>
+                          <input matInput type="text" name="feature.value" [(ngModel)]="displayMedia.url"
+                              placeholder="Name Of Tab">
+                      </mat-form-field>
+                  </div>
+                  <div class="col-md-3">
+                      <button class="btn btn-primary mr-1" type="button" (click)="addTab(selectAfterAdding)"> Add
+                          new</button>
+                  </div>
+              </div> -->
+              <div class="row">
+                <mat-tab-group [selectedIndex]="selectedGeoTab.value"
+                  (selectedIndexChange)="selectedGeoTab.setValue($event)">
+                  <mat-tab *ngFor="let geometryTab of product.geometry; let index = index" [label]="geometryTab.key">
+                    <div style="margin:10px">
+                      <mat-tab-group [selectedIndex]="selectedGeoKeyTab.value"
+                        (selectedIndexChange)="selectedGeoKeyTab.setValue($event)">
+                        <mat-tab *ngFor="let tab of geometryKeyTabs; let index = index" [label]="tab">
+                          <div *ngIf="tab== 'High'">
+                            <div *ngFor="let high of geometryTab.high;let innerIndex = index">
+                              <div class="row marginZero" style="margin-top: 10px;">
+                                <div class="col-md-1">{{high.order}}</div>
+                                <div class="col-md-4">{{high.key}}</div>
+                                <div class="col-md-2">
+                                  <mat-form-field #selectAfterAdding>
+                                    <input matInput type="number" name="high.small{{innerIndex}}{{index}}"
+                                      [(ngModel)]="high.small" placeholder="Small (in MM)">
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-2">
+                                  <mat-form-field #selectAfterAdding>
+                                    <input matInput type="number" name="high.medium {{innerIndex}} {{index}}"
+                                      [(ngModel)]="high.medium" placeholder="Medium (in MM)">
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-2">
+                                  <mat-form-field #selectAfterAdding>
+                                    <input matInput type="number" name="high.large{{innerIndex}}{{index}}"
+                                      [(ngModel)]="high.large" placeholder="Large (in MM)">
+                                  </mat-form-field>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div *ngIf="tab== 'Low'">
+                            <div *ngFor="let low of geometryTab.low;let innerIndex = index">
+                              <div class="row marginZero" style="margin-top: 10px;">
+                                <div class="col-md-1">{{low.order}}</div>
+                                <div class="col-md-4">{{low.key}}</div>
+                                <div class="col-md-2">
+                                  <mat-form-field #selectAfterAdding>
+                                    <input matInput type="number" name="low.small{{innerIndex}}{{index}}"
+                                      [(ngModel)]="low.small" placeholder="Small (in MM)">
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-2">
+                                  <mat-form-field #selectAfterAdding>
+                                    <input matInput type="number" name="low.medium {{innerIndex}} {{index}}"
+                                      [(ngModel)]="low.medium" placeholder="Medium (in MM)">
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-2">
+                                  <mat-form-field #selectAfterAdding>
+                                    <input matInput type="number" name="low.large{{innerIndex}}{{index}}"
+                                      [(ngModel)]="low.large" placeholder="Large (in MM)">
+                                  </mat-form-field>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </mat-tab>
+                      </mat-tab-group>
+                    </div>
+                  </mat-tab>
+                </mat-tab-group>
+              </div>
+
+
+
+              <div class="text-center">
+                <button class="btn btn-primary mr-1" type="submit">Save</button>
+                <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

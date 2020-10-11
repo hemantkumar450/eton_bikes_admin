@@ -1,0 +1,50 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-10"></div>
+      <div class="col-md-2">
+        <app-common-button 
+          [text]=""
+          (onClick)="onEditProduct()"
+          [shouldShow]="permission.shouldAdd">
+       </app-common-button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-info">
+            <h4 class="card-title">Product Table</h4>
+            <p class="card-category"> Get All Products</p>
+          </div>
+          <div class="card-body">
+          <app-common-grid
+            [isBrandFilter]=true
+            [isModelFilter]= true
+            [isEdit]="permission.shouldEdit"
+            [isView]= "permission.shouldView"
+            [isDelete]="permission.shouldDelete"
+            [isStatusChange]="permission.shouldStatusChange"
+            [dataSource]="products" 
+            [displayedColumns]="displayedColumns"
+            [length]="totalRecords" 
+            [pageSize]="pageSize" 
+            (onBrandChanged)="onBrandChanged($event)"
+            (onModelChanged)="onModelChanged($event)"
+            (onFilterReset)="onFilterReset()"
+            (doFiltering)="doFilter($event)"
+            (onSorting)="onSorting($event)"
+            (onPageChanged)="pageChanged($event)"
+            [pageSizeOptions]="[5, 10, 25, 100]"
+            (onDelete)="deleteProduct($event)"
+            (onStatusChange)="statusChange($event)"
+            (onEdit)="onEditProduct($event)"
+            (onView)="onViewProduct($event)"
+          >
+          </app-common-grid>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

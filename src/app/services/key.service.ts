@@ -16,6 +16,10 @@ export class KeyService {
     });
   }
 
+  getKeyByType(category): Observable<any> {
+    return this.http.get<any>(`${environment.baseUrl}admin/keys/${category}`);
+  }
+
   saveKey(key: KeyModel): Observable<any> {
     if (key._id) {
       return this.http.put<any>(

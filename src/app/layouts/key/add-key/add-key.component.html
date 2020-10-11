@@ -8,15 +8,6 @@
 
 </div>
 <div class="row">
-  <div class="col-md-4" *ngIf="data.response.category == 'build_spec'">
-    <mat-form-field class="example-full-width">
-      <mat-select [(ngModel)]="data.response.order" placeholder="Select Orders" name=" order">
-        <mat-option *ngFor="let order of orders" [value]="order">
-          {{order | uppercase}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
   <div class="col-md-6">
     <mat-form-field class="example-full-width">
       <mat-select [(ngModel)]="data.response.category" placeholder="Select Category" name=" category">

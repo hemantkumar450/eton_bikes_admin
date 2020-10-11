@@ -12,27 +12,7 @@ export class AddKeyComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
-  categories = ["geometry", "component", "build_spec", "key_feature"];
-  orders = [
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
-    "l",
-    "m",
-    "n",
-    "o",
-    "p",
-    "q",
-    "r",
-  ];
+  categories = ["geometry", "component", "build_spec", "feature"];
 
   ngOnInit() {}
 

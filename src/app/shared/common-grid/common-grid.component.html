@@ -7,30 +7,6 @@
             </mat-form-field>
         </div>
     </div>
-    <div class="col-md-2" *ngIf="isBrandFilter">
-        <div fxLayout fxLayoutAlign="center center">
-            <mat-form-field class="example-full-width">
-                <mat-select [(ngModel)]="brandId" placeholder="Filter with Brand"
-                    (selectionChange)="onBrandFilter($event)" name="city">
-                    <mat-option *ngFor="let brand of brands" [value]="brand._id">
-                        {{brand.name}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-    </div>
-    <div class="col-md-2" *ngIf="isModelFilter">
-        <div fxLayout fxLayoutAlign="center center">
-            <mat-form-field class="example-full-width">
-                <mat-select [(ngModel)]="modelId" placeholder="Filter with Model"
-                    (selectionChange)="onModelFilter($event)" name="city">
-                    <mat-option *ngFor="let model of models" [value]="model._id">
-                        {{model.name}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-    </div>
     <div class="col-md-2" *ngIf="isActiveFiter">
         <div fxLayout fxLayoutAlign="center center">
             <mat-form-field class="example-full-width">
@@ -95,9 +71,9 @@
             </span>
             <span *ngIf="column === 'toggle' && isToggle">
                 <section class="example-section">
-                    <mat-slide-toggle [matTooltipPosition]="'above'" matTooltip="Active/Inactive" class="example-margin"
+                    <!-- <mat-slide-toggle [matTooltipPosition]="'above'" matTooltip="Active/Inactive" class="example-margin"
                         (change)="onToggleEvent(element)" [checked]="element.active">
-                    </mat-slide-toggle>
+                    </mat-slide-toggle> -->
                 </section>
             </span>
             <span *ngIf="column === 'changeStatus' && isStatusChange">

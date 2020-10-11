@@ -13,4 +13,10 @@ export const LayoutRoutes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import("./key/key.module").then((mod) => mod.KeyModule),
   },
+  {
+    path: "product",
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import("./product/product.module").then((mod) => mod.ProductModule),
+  },
 ];
