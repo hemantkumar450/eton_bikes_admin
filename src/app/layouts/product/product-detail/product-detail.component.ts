@@ -4,7 +4,6 @@ import { forkJoin } from "rxjs";
 import { ConfirmationModalComponent } from "app/shared/confirmation-modal/confirmation-modal.component";
 import { AlertService } from "app/shared/alert/alert.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { head } from "lodash";
 import { ProductService } from "app/services/product.service";
 
 import { PopUpModalService } from "app/services/pop-up.service";
@@ -12,7 +11,11 @@ import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { environment } from "environments/environment";
 import { FormControl } from "@angular/forms";
 import { KeyService } from "app/services/key.service";
-import { DisplayMedia } from "../product-add/product-add.component";
+
+export class DisplayMedia {
+  category: string;
+  url: string;
+}
 
 @Component({
   selector: "app-product-detail",
@@ -31,7 +34,7 @@ export class ProductDetailComponent implements OnInit {
   component: KeyValueModel = new KeyValueModel();
   targetUrl: string = `${environment.baseUrl}admin/fileUploader`;
   private dialogRef: MatDialogRef<ConfirmationModalComponent>;
-  geometryKeyTabs = ["High", "Low"];
+  geometryKeyTabs = ["High", "Low", "Frame"];
   selectedGeoTab = new FormControl(0);
   selectedGeoKeyTab = new FormControl(0);
 

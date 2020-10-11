@@ -25,11 +25,6 @@ export const ProductRoutes: Routes = [
         component: ProductDetailComponent,
         resolve: { response: RouteResolver },
       },
-      {
-        path: "view/:id",
-        component: ProductDetailComponent,
-        resolve: { response: RouteResolver },
-      },
     ],
   },
 ];

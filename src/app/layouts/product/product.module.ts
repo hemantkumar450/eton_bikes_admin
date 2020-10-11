@@ -5,8 +5,6 @@ import { ProductListComponent } from "./product-list/product-list.component";
 import { ProductComponent } from "./product.component";
 import { routing } from "./product.routing";
 import { SharedComponentModule } from "app/shared/shared.module";
-import { ProductAddComponent } from "./product-add/product-add.component";
-import { ProductEditComponent } from "./product-edit/product-edit.component";
 
 @NgModule({
   imports: [routing, SharedComponentModule, CommonModule],
@@ -14,8 +12,6 @@ import { ProductEditComponent } from "./product-edit/product-edit.component";
     ProductDetailComponent,
     ProductListComponent,
     ProductComponent,
-    ProductAddComponent,
-    ProductEditComponent,
   ],
   exports: [],
   entryComponents: [],

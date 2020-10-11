@@ -11,49 +11,38 @@
           <div class="card-body">
             <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
               <div class="row">
-                <div class="col-md-7">
-                  <div class="row">
-                    <div class="col-md-5">
-
-                    </div>
-                    <div class="col-md-5">
-
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <mat-form-field>
-                        <input matInput type="text" name="name" [(ngModel)]="product.name" #name="ngModel"
-                          placeholder="Name" required>
-                        <mat-error *ngIf="f.submitted && name.invalid">
-                          Name is <strong>required</strong>
-                        </mat-error>
-                      </mat-form-field>
-                    </div>
-                    <div class="col-md-6">
-                      <mat-form-field>
-                        <input matInput type="text" name="title" [(ngModel)]="product.title" #title="ngModel"
-                          placeholder="title" required>
-                        <mat-error *ngIf="f.submitted && title.invalid">
-                          Title is <strong>required</strong>
-                        </mat-error>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                  <div class="row" *ngIf="product._id">
-                    <div class="col-md-10">
-                      <mat-form-field>
-                        <input matInput type="text" name="slug" [(ngModel)]="product.slug" placeholder="Slug" readonly>
-                      </mat-form-field>
-                    </div>
+                <div class="col-md-4">
+                  <mat-form-field>
+                    <input matInput type="text" name="name" [(ngModel)]="product.name" #name="ngModel"
+                      placeholder="Name" required>
+                    <mat-error *ngIf="f.submitted && name.invalid">
+                      Name is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field>
+                    <input matInput type="text" name="title" [(ngModel)]="product.title" #title="ngModel"
+                      placeholder="title" required>
+                    <mat-error *ngIf="f.submitted && title.invalid">
+                      Title is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="row" *ngIf="product._id">
+                  <div class="col-md-10">
+                    <mat-form-field>
+                      <input matInput type="text" name="slug" [(ngModel)]="product.slug" placeholder="Slug" readonly>
+                    </mat-form-field>
                   </div>
                 </div>
-                <div class="col-md-5">
-                  <mat-form-field>
-                    <textarea style="height: 100px;" matInput [(ngModel)]="product.description" name="description"
-                      placeholder="Description" cdkTextareaAutosize cdkAutosizeMinRows=7
-                      cdkAutosizeMaxRows=20></textarea>
-                  </mat-form-field>
+              </div>
+
+              <div class="row">
+                <div class="col-md-10">
+                  <ckeditor [(ngModel)]="product.description" name="product.description" [config]="ckeConfig"
+                    debounce="500">
+                  </ckeditor>
                 </div>
               </div>
 
@@ -296,33 +285,35 @@
                   </div>
               </div> -->
               <div class="row">
-                <mat-tab-group [selectedIndex]="selectedGeoTab.value"
-                  (selectedIndexChange)="selectedGeoTab.setValue($event)">
-                  <mat-tab *ngFor="let geometryTab of product.geometry; let index = index" [label]="geometryTab.key">
+                <mat-tab-group>
+                  <mat-tab *ngFor="let geometryTab of product.geometry; let geometryIndex = index"
+                    [label]="geometryTab.key">
                     <div style="margin:10px">
-                      <mat-tab-group [selectedIndex]="selectedGeoKeyTab.value"
-                        (selectedIndexChange)="selectedGeoKeyTab.setValue($event)">
-                        <mat-tab *ngFor="let tab of geometryKeyTabs; let index = index" [label]="tab">
+                      <mat-tab-group>
+                        <mat-tab *ngFor="let tab of geometryKeyTabs; let tabIndex = index" [label]="tab">
                           <div *ngIf="tab== 'High'">
-                            <div *ngFor="let high of geometryTab.high;let innerIndex = index">
+                            <div *ngFor="let high of geometryTab.high;let highIndex = index">
                               <div class="row marginZero" style="margin-top: 10px;">
                                 <div class="col-md-1">{{high.order}}</div>
                                 <div class="col-md-4">{{high.key}}</div>
                                 <div class="col-md-2">
-                                  <mat-form-field #selectAfterAdding>
-                                    <input matInput type="number" name="high.small{{innerIndex}}{{index}}"
+                                  <mat-form-field>
+                                    <input matInput type="text"
+                                      name="highSmall{{geometryIndex}}_{{tabIndex}}_{{highIndex}}"
                                       [(ngModel)]="high.small" placeholder="Small (in MM)">
                                   </mat-form-field>
                                 </div>
                                 <div class="col-md-2">
-                                  <mat-form-field #selectAfterAdding>
-                                    <input matInput type="number" name="high.medium {{innerIndex}} {{index}}"
+                                  <mat-form-field>
+                                    <input matInput type="number"
+                                      name="high.medium{{geometryIndex}}_{{tabIndex}}_{{highIndex}}"
                                       [(ngModel)]="high.medium" placeholder="Medium (in MM)">
                                   </mat-form-field>
                                 </div>
                                 <div class="col-md-2">
-                                  <mat-form-field #selectAfterAdding>
-                                    <input matInput type="number" name="high.large{{innerIndex}}{{index}}"
+                                  <mat-form-field>
+                                    <input matInput type="number"
+                                      name="high.large{{geometryIndex}}_{{tabIndex}}_{{highIndex}}"
                                       [(ngModel)]="high.large" placeholder="Large (in MM)">
                                   </mat-form-field>
                                 </div>
@@ -330,26 +321,50 @@
                             </div>
                           </div>
                           <div *ngIf="tab== 'Low'">
-                            <div *ngFor="let low of geometryTab.low;let innerIndex = index">
+                            <div *ngFor="let low of geometryTab.low;let lowIndex = index">
                               <div class="row marginZero" style="margin-top: 10px;">
                                 <div class="col-md-1">{{low.order}}</div>
                                 <div class="col-md-4">{{low.key}}</div>
                                 <div class="col-md-2">
-                                  <mat-form-field #selectAfterAdding>
-                                    <input matInput type="number" name="low.small{{innerIndex}}{{index}}"
+                                  <mat-form-field>
+                                    <input matInput type="number"
+                                      name="low.small{{geometryIndex}}_{{tabIndex}}_{{lowIndex}}"
                                       [(ngModel)]="low.small" placeholder="Small (in MM)">
                                   </mat-form-field>
                                 </div>
                                 <div class="col-md-2">
-                                  <mat-form-field #selectAfterAdding>
-                                    <input matInput type="number" name="low.medium {{innerIndex}} {{index}}"
+                                  <mat-form-field>
+                                    <input matInput type="number"
+                                      name="low.medium{{geometryIndex}}_{{tabIndex}}_{{lowIndex}}"
                                       [(ngModel)]="low.medium" placeholder="Medium (in MM)">
                                   </mat-form-field>
                                 </div>
                                 <div class="col-md-2">
-                                  <mat-form-field #selectAfterAdding>
-                                    <input matInput type="number" name="low.large{{innerIndex}}{{index}}"
+                                  <mat-form-field>
+                                    <input matInput type="number"
+                                      name="low.large{{geometryIndex}}_{{tabIndex}}_{{lowIndex}}"
                                       [(ngModel)]="low.large" placeholder="Large (in MM)">
+                                  </mat-form-field>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div *ngIf="tab== 'Frame'">
+                            <div *ngFor="let frame_size of geometryTab.frame_size;let frameIndex = index">
+                              <div class="row marginZero">
+                                <div class="col-md-4">{{frame_size.key}}</div>
+                                <div class="col-md-2">
+                                  <mat-form-field>
+                                    <input matInput type="number"
+                                      name="frame_size.from{{geometryIndex}}_{{tabIndex}}_{{frameIndex}}"
+                                      [(ngModel)]="frame_size.from" placeholder="From">
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-2">
+                                  <mat-form-field>
+                                    <input matInput type="number"
+                                      name="frame_size.to{{geometryIndex}}_{{tabIndex}}_{{frameIndex}}"
+                                      [(ngModel)]="frame_size.to" placeholder="To">
                                   </mat-form-field>
                                 </div>
                               </div>
@@ -361,9 +376,6 @@
                   </mat-tab>
                 </mat-tab-group>
               </div>
-
-
-
               <div class="text-center">
                 <button class="btn btn-primary mr-1" type="submit">Save</button>
                 <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>

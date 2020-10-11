@@ -2,7 +2,7 @@ export class Product {
   _id: string;
   name: string;
   title: string;
-  description: string;
+  description: string = "Please write product description here!!";
   features: KeyValueModel[] = [];
   slug: string;
   close_up_media: any[] = [];
@@ -35,15 +35,21 @@ export class Geometry {
   key: string;
   high: SizeModel[] = [];
   low: SizeModel[] = [];
-  frame_size: FrameSize[] = Array(3).fill(new FrameSize());
+  frame_size: FrameSize[] = [];
 
   constructor(key) {
     this.key = key;
     const highValues = GeometryKeyName;
+    const frames = ["small", "medium", "large"];
     highValues.forEach((item) => {
       const size = new SizeModel(item);
       this.high.push(size);
       this.low.push(size);
+    });
+
+    frames.forEach((frame) => {
+      const item = new FrameSize(frame);
+      this.frame_size.push(item);
     });
   }
 
@@ -68,6 +74,9 @@ export class FrameSize {
   key: string;
   from: number;
   to: number;
+  constructor(key) {
+    this.key = key;
+  }
 }
 
 const GeometryKeyName = [
