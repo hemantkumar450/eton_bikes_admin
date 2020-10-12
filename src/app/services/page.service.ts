@@ -23,20 +23,19 @@ export class PageService {
     );
   }
 
-  savePage(pageModel: PageModel): Observable<PageModel> {
-    if (pageModel._id) {
+  savePage(page: PageModel): Observable<PageModel> {
+    if (page._id) {
       return this.http.put<PageModel>(
-        `${environment.baseUrl}admin/pages/${pageModel._id}`,
-        PageModel
+        `${environment.baseUrl}admin/pages/${page._id}`,
+        page
       );
     }
-    return this.http.post<PageModel>(
-      `${environment.baseUrl}admin/pages`,
-      PageModel
-    );
+    return this.http.post<PageModel>(`${environment.baseUrl}admin/pages`, page);
   }
 
   deletePage(pageId): Observable<PageModel> {
-    return this.http.delete<PageModel>(`${environment.baseUrl}admin/pages`);
+    return this.http.delete<PageModel>(
+      `${environment.baseUrl}admin/pages/${pageId}`
+    );
   }
 }

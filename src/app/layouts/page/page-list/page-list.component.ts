@@ -18,7 +18,13 @@ import { MatTableDataSource } from "@angular/material/table";
   providers: [PopUpModalService],
 })
 export class PageListComponent implements OnInit {
-  displayedColumns: string[] = ["name", "description", "edit", "changeStatus"];
+  displayedColumns: string[] = [
+    "name",
+    "heading",
+    "pageType",
+    "edit",
+    "delete",
+  ];
   pages = new MatTableDataSource<PageModel>();
   pageSize: Number = PaginationEnum.PageSize;
   totalRecords: number = 10;
@@ -43,7 +49,7 @@ export class PageListComponent implements OnInit {
     this.pageService
       .getPages(this.paginationService.getParams())
       .subscribe((result) => {
-        this.pages.data = result.data.pages;
+        this.pages.data = result.data.pageContents;
         this.totalRecords = result.data.totalRecords;
       });
   }
@@ -58,13 +64,13 @@ export class PageListComponent implements OnInit {
     this.router.navigate([route]);
   }
 
-  deletePage(pageId: string) {
+  deletePage(page: PageModel) {
     const html = `<h3 mat-dialog-title>Are you sure want to delete this page ?</h3>`;
     this.popUpModalService
       .openDialog({ html, component: null })
       .subscribe((res) => {
         if (res) {
-          this.pageService.deletePage(pageId).subscribe((res) => {
+          this.pageService.deletePage(page._id).subscribe((res) => {
             this.getPages();
           });
         }
@@ -72,7 +78,7 @@ export class PageListComponent implements OnInit {
   }
 
   statusChange(page: PageModel) {
-    const html = `<h3 mat-dialog-title>Are you sure want to change status of <b>${page._id}</b> ?</h3>`;
+    const html = `<h3 mat-dialog-title>Are you sure want to change status of <b>${page.name}</b> ?</h3>`;
     this.popUpModalService
       .openDialog({ html, component: null })
       .subscribe((res) => {

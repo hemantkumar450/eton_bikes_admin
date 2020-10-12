@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { environment } from "environments/environment";
-import { PageModel } from "app/models/page.model";
+import { PageModel, RedirectDetail, Section } from "app/models/page.model";
 import { PageService } from "app/services/page.service";
 
 export class DisplayMedia {
@@ -21,6 +21,16 @@ export class DisplayMedia {
 export class PageDetailComponent implements OnInit {
   page: PageModel = new PageModel();
   targetUrl: string = `${environment.baseUrl}admin/fileUploader`;
+  ckeConfig: any;
+  pageTypes = ["home", "enquiry"];
+  mediaSides = ["left", "right", "center"];
+  sectionTypes = [
+    "banner",
+    "social_media",
+    "api_call",
+    "slider",
+    "media_panel",
+  ];
 
   constructor(
     private router: Router,
@@ -51,7 +61,29 @@ export class PageDetailComponent implements OnInit {
 
   onFileComplete(event, type) {}
 
-  deleteImage(type) {}
+  deleteSectionImage(index, medias) {
+    medias.splice(index, 1);
+  }
+
+  addSection() {
+    this.page.sections.push(new Section());
+  }
+
+  deleteSection(index) {
+    this.page.sections.splice(index, 1);
+  }
+
+  addMedia(event, section: Section) {
+    section.medias.push(Object.assign(event.data));
+  }
+
+  addRedirectDetail(redirect_detail) {
+    redirect_detail.push(new RedirectDetail());
+  }
+
+  deleteRedirectDetail(index, redirect_detail) {
+    redirect_detail.splice(index, 1);
+  }
 
   onSubmit() {
     this.pageService.savePage(this.page).subscribe((res) => {

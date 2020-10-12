@@ -2,7 +2,7 @@ export class PageModel {
   _id: string;
   name: string;
   heading: string;
-  content: string;
+  content: string = "Write your content here!!";
   sections: Section[] = [];
   pageType: string;
   is_deleted: boolean;
@@ -14,7 +14,7 @@ export class Section {
   order: number;
   media_side: string;
   redirect_detail: RedirectDetail[] = [];
-  content: string;
+  content: string = "Write your content here!!";
   medias: any[] = [];
   sectionType: string;
 }
