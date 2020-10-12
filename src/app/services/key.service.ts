@@ -10,14 +10,14 @@ import { Observable } from "rxjs";
 export class KeyService {
   constructor(private http: HttpClient) {}
 
-  getKeys(params): Observable<KeyModel> {
-    return this.http.get<KeyModel>(`${environment.baseUrl}admin/keys`, {
+  getKeys(params): Observable<any> {
+    return this.http.get<any>(`${environment.baseUrl}admin/keys`, {
       params: params,
     });
   }
 
-  getKeyByType(category): Observable<{ data: KeyModel }> {
-    return this.http.get<{ data: KeyModel }>(
+  getKeyByType(category): Observable<any> {
+    return this.http.get<any>(
       `${environment.baseUrl}admin/keys/${category}`
     );
   }
