@@ -1,0 +1,136 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <h4 class="card-title" *ngIf="!subProduct._id">Add Sub Product</h4>
+                        <h4 class="card-title" *ngIf="subProduct._id">Edit Sub Product</h4>
+                        <p class="card-category">Complete your Sub Product details</p>
+                    </div>
+                    <div class="card-body">
+                        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <input matInput type="text" name="name" [(ngModel)]="subProduct.name"
+                                            #name="ngModel" placeholder="Name" required>
+                                        <mat-error *ngIf="f.submitted && name.invalid">
+                                            Name is <strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <input matInput type="text" name="description"
+                                            [(ngModel)]="subProduct.description" #description="ngModel"
+                                            placeholder="Description" required>
+                                        <mat-error *ngIf="f.submitted && description.invalid">
+                                            Description is <strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field>
+                                        <mat-select [(ngModel)]="subProduct.product" name="product" #product="ngModel"
+                                            placeholder="Select a Product">
+                                            <mat-option *ngFor="let product of products" [value]="product">
+                                                {{product.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h3>Detail Of Sub Product Image</h3>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <mat-form-field>
+                                        <input matInput type="text" name="subProduct.detail.name"
+                                            [(ngModel)]="subProduct.detail.name" #description="ngModel"
+                                            placeholder="Name">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <span>Media Upload</span>
+                                </div>
+                                <div class="col-md-3">
+                                    <app-file-uploader [param]="{}" [target]="targetUrl"
+                                        (complete)="onFileComplete($event, 'media')">
+                                    </app-file-uploader>
+                                </div>
+                                <div class="col-md-3" *ngIf="subProduct.detail.media">
+                                    <img src="./assets/img/user_profile.png" style="width:50%">
+                                </div>
+                                <div class="col-md-3" *ngIf="subProduct.detail.media">
+                                    <button type="button btn-secondary" type="button" mat-icon-button
+                                        (click)="deleteImage('media')">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <span>Icon Upload</span>
+                                </div>
+                                <div class="col-md-3">
+                                    <app-file-uploader [param]="{}" [target]="targetUrl"
+                                        (complete)="onFileComplete($event, 'icon')">
+                                    </app-file-uploader>
+                                </div>
+                                <div class="col-md-3" *ngIf="subProduct.detail.icon">
+                                    <img src="./assets/img/user_profile.png" style="width:50%">
+                                </div>
+                                <div class="col-md-3" *ngIf="subProduct.detail.icon">
+                                    <button type="button btn-secondary" type="button" mat-icon-button
+                                        (click)="deleteImage('icon')">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h3>Build Spec</h3>
+                                </div>
+                            </div>
+                            <div class="row" *ngFor="let build_spec of subProduct.build_specs; let index=index">
+                                <div class="col-md-2">{{build_spec.key}}</div>
+                                <div class="col-md-5">
+                                    <mat-form-field>
+                                        <input matInput type="text" name="build_spec_{{index}}"
+                                            [(ngModel)]="build_spec.value" placeholder="Value">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-1">
+                                    <!-- <button type="button btn-secondary" type="button" mat-icon-button
+                                        (click)="deleteSpec(index)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button> -->
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button class="btn btn-primary mr-1" type="submit">Save</button>
+                                <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

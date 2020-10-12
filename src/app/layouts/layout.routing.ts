@@ -27,4 +27,10 @@ export const LayoutRoutes: Routes = [
         (mod) => mod.SubProductModule
       ),
   },
+  {
+    path: "page",
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import("./page/page.module").then((mod) => mod.PageModule),
+  },
 ];
