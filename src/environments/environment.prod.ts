@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: "https://api.etonbikes.com/api/"
+  baseUrl: "http://148.72.208.32:5000/api/"
 };
