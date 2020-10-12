@@ -19,4 +19,12 @@ export const LayoutRoutes: Routes = [
     loadChildren: () =>
       import("./product/product.module").then((mod) => mod.ProductModule),
   },
+  {
+    path: "sub-product",
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import("./sub-product/sub-product.module").then(
+        (mod) => mod.SubProductModule
+      ),
+  },
 ];

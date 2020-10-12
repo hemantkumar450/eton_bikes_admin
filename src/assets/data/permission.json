@@ -380,6 +380,66 @@
             "key": "shouldStatusChange"
         },
         {
+            "module_name": "subProduct",
+            "method": "get",
+            "icon": "directions_car",
+            "group": "master management",
+            "description": "get subProduct list",
+            "backend_route": "/subProduct",
+            "template_route": "/sub-product",
+            "key": "shouldGet"
+        },
+        {
+            "module_name": "subProduct",
+            "method": "put",
+            "icon": "directions_car",
+            "group": "master management",
+            "description": "",
+            "backend_route": "/subProduct/:id",
+            "template_route": "/sub-product",
+            "key": "shouldEdit"
+        },
+        {
+            "module_name": "subProduct",
+            "method": "post",
+            "icon": "directions_car",
+            "group": "master management",
+            "description": "get subProduct list",
+            "backend_route": "/subProduct",
+            "template_route": "/sub-product",
+            "key": "shouldAdd"
+        },
+        {
+            "module_name": "subProduct",
+            "method": "get",
+            "icon": "directions_car",
+            "group": "master management",
+            "description": "get subProduct list",
+            "backend_route": "/subProduct/:id",
+            "template_route": "/sub-product",
+            "key": "shouldView"
+        },
+        {
+            "module_name": "subProduct",
+            "method": "delete",
+            "icon": "directions_car",
+            "group": "master management",
+            "description": "get subProduct list",
+            "backend_route": "/subProduct",
+            "template_route": "/sub-product",
+            "key": "shouldDelete"
+        },
+        {
+            "module_name": "subProduct",
+            "method": "get",
+            "icon": "directions_car",
+            "group": "master management",
+            "description": "get subProduct list",
+            "backend_route": "/subProduct/:id",
+            "template_route": "/sub-product",
+            "key": "shouldStatusChange"
+        },
+        {
             "module_name": "dashboard",
             "method": "get",
             "icon": "content_paste",

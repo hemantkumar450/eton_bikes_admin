@@ -10,31 +10,35 @@ import { Observable } from "rxjs";
 export class KeyService {
   constructor(private http: HttpClient) {}
 
-  getKeys(params): Observable<any> {
-    return this.http.get<any>(`${environment.baseUrl}admin/keys`, {
+  getKeys(params): Observable<KeyModel> {
+    return this.http.get<KeyModel>(`${environment.baseUrl}admin/keys`, {
       params: params,
     });
   }
 
-  getKeyByType(category): Observable<any> {
-    return this.http.get<any>(`${environment.baseUrl}admin/keys/${category}`);
+  getKeyByType(category): Observable<{ data: KeyModel }> {
+    return this.http.get<{ data: KeyModel }>(
+      `${environment.baseUrl}admin/keys/${category}`
+    );
   }
 
-  saveKey(key: KeyModel): Observable<any> {
+  saveKey(key: KeyModel): Observable<KeyModel> {
     if (key._id) {
-      return this.http.put<any>(
+      return this.http.put<KeyModel>(
         `${environment.baseUrl}admin/keys/${key._id}`,
         key
       );
     }
-    return this.http.post<any>(`${environment.baseUrl}admin/keys`, key);
+    return this.http.post<KeyModel>(`${environment.baseUrl}admin/keys`, key);
   }
 
-  toggleKey(keyId): Observable<any> {
-    return this.http.post<any>(`${environment.baseUrl}admin/keys`, keyId);
+  toggleKey(keyId): Observable<KeyModel> {
+    return this.http.post<KeyModel>(`${environment.baseUrl}admin/keys`, keyId);
   }
 
-  deleteKey(keyId): Observable<any> {
-    return this.http.delete<any>(`${environment.baseUrl}admin/keys/${keyId}`);
+  deleteKey(keyId): Observable<KeyModel> {
+    return this.http.delete<KeyModel>(
+      `${environment.baseUrl}admin/keys/${keyId}`
+    );
   }
 }

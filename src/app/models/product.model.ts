@@ -29,6 +29,11 @@ export class TechSupport {
 export class KeyValueModel {
   key: string;
   value: string;
+  constructor(key?) {
+    if (key) {
+      this.key = key;
+    }
+  }
 }
 
 export class Geometry {

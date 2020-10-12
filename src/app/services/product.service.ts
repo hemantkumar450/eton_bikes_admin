@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { ApiResponse } from "app/models/api-response.model";
 import { Product } from "app/models/product.model";
 import { environment } from "environments/environment";
 import { Observable } from "rxjs";
@@ -16,23 +17,26 @@ export class ProductService {
     });
   }
 
-  getProductById(productId): Observable<any> {
-    return this.http.get<any>(
+  getProductById(productId): Observable<ApiResponse<Product>> {
+    return this.http.get<ApiResponse<Product>>(
       `${environment.baseUrl}admin/products/${productId}`
     );
   }
 
-  saveProduct(product: Product): Observable<any> {
+  saveProduct(product: Product): Observable<Product> {
     if (product._id) {
-      return this.http.put<any>(
+      return this.http.put<Product>(
         `${environment.baseUrl}admin/products/${product._id}`,
         product
       );
     }
-    return this.http.post<any>(`${environment.baseUrl}admin/products`, product);
+    return this.http.post<Product>(
+      `${environment.baseUrl}admin/products`,
+      product
+    );
   }
 
-  deleteProduct(productId): Observable<any> {
-    return this.http.delete<any>(`${environment.baseUrl}admin/products`);
+  deleteProduct(productId): Observable<Product> {
+    return this.http.delete<Product>(`${environment.baseUrl}admin/products`);
   }
 }
