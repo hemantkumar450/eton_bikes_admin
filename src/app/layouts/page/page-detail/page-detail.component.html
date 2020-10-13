@@ -182,13 +182,13 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div *ngFor="let media of section.medias">
+                                            <div *ngFor="let media of section.medias; let mediaIndex= index">
                                                 <div class="col-md-2 floatLeft">
                                                     <img src="{{mediaUrl}}{{media.media_link}}" style="width:50%">
                                                 </div>
                                                 <div class="col-md-1 floatLeft">
                                                     <button type="button btn-secondary" type="button" mat-icon-button
-                                                        (click)="deleteSectionImage(index, section.medias)">
+                                                        (click)="deleteSectionImage(mediaIndex, section.medias)">
                                                         <mat-icon>delete</mat-icon>
                                                     </button>
                                                 </div>
