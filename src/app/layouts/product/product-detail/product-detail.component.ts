@@ -33,6 +33,7 @@ export class ProductDetailComponent implements OnInit {
   faqs: KeyValueModel = new KeyValueModel();
   component: KeyValueModel = new KeyValueModel();
   targetUrl: string = `${environment.baseUrl}admin/fileUploader`;
+  mediaUrl: string = environment.mediaUrl;
   private dialogRef: MatDialogRef<ConfirmationModalComponent>;
   geometryKeyTabs = ["High", "Low", "Frame"];
   selectedGeoTab = new FormControl(0);

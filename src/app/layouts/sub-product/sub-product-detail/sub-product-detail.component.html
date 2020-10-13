@@ -35,12 +35,15 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <mat-form-field>
-                                        <mat-select [(ngModel)]="subProduct.product" name="product" #product="ngModel"
-                                            placeholder="Select a Product">
-                                            <mat-option *ngFor="let product of products" [value]="product">
+                                        <mat-select [(ngModel)]="subProduct.product._id" name="product"
+                                            #product="ngModel" placeholder="Select a Product" required>
+                                            <mat-option *ngFor="let product of products" [value]="product._id">
                                                 {{product.name}}
                                             </mat-option>
                                         </mat-select>
+                                        <mat-error *ngIf="f.submitted && product.invalid">
+                                            Product is <strong>required</strong>
+                                        </mat-error>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -71,7 +74,7 @@
                                     </app-file-uploader>
                                 </div>
                                 <div class="col-md-3" *ngIf="subProduct.detail.media">
-                                    <img src="./assets/img/user_profile.png" style="width:50%">
+                                    <img src="{{mediaUrl}}{{subProduct.detail.media.media_link}}" style="width:50%">
                                 </div>
                                 <div class="col-md-3" *ngIf="subProduct.detail.media">
                                     <button type="button btn-secondary" type="button" mat-icon-button
@@ -91,7 +94,7 @@
                                     </app-file-uploader>
                                 </div>
                                 <div class="col-md-3" *ngIf="subProduct.detail.icon">
-                                    <img src="./assets/img/user_profile.png" style="width:50%">
+                                    <img src="{{mediaUrl}}{{subProduct.detail.icon.media_link}}" style="width:50%">
                                 </div>
                                 <div class="col-md-3" *ngIf="subProduct.detail.icon">
                                     <button type="button btn-secondary" type="button" mat-icon-button

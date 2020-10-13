@@ -24,6 +24,7 @@ export class PageDetailComponent implements OnInit {
   ckeConfig: any;
   pageTypes = ["home", "enquiry"];
   mediaSides = ["left", "right", "center"];
+  mediaUrl: string = environment.mediaUrl;
   sectionTypes = [
     "banner",
     "social_media",

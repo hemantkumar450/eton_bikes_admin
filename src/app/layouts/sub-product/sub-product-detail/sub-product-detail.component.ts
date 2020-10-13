@@ -7,7 +7,7 @@ import { SubProductService } from "app/services/sub-product.service";
 
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { environment } from "environments/environment";
-import { SubProduct } from "app/models/sub-product.model";
+import { SubProduct, SubProductDetail } from "app/models/sub-product.model";
 import { KeyValueModel, Product } from "app/models/product.model";
 import { ProductService } from "app/services/product.service";
 
@@ -25,6 +25,7 @@ export class SubProductDetailComponent implements OnInit {
   subProduct: SubProduct = new SubProduct();
   targetUrl: string = `${environment.baseUrl}admin/fileUploader`;
   products: Product[] = [];
+  mediaUrl: string = environment.mediaUrl;
 
   constructor(
     private router: Router,
@@ -53,6 +54,9 @@ export class SubProductDetailComponent implements OnInit {
       .getSubProductById(this.subProduct._id)
       .subscribe((res) => {
         this.subProduct = res.data;
+        if (!this.subProduct.detail) {
+          this.subProduct.detail = new SubProductDetail();
+        }
       });
   }
 

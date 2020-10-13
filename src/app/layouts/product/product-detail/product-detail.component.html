@@ -231,11 +231,10 @@
                   </app-file-uploader>
                 </div>
               </div>
-
               <div>
                 <div class="row" style="border: 1px solid #e1e1e1; padding:20px">
                   <div class="col-md-4" *ngFor="let close_up of product.close_up_media;let index= index">
-                    <img src="./assets/img/user_profile.png" style="width:50%">
+                    <img src="{{mediaUrl}}{{close_up.media_link}}" style="width:50%">
                     <button type="button btn-secondary" type="button" mat-icon-button
                       (click)="deleteImage(index, 'close_up')">
                       <mat-icon>delete</mat-icon>
@@ -257,7 +256,7 @@
               <div>
                 <div class="row" style="border: 1px solid #e1e1e1; padding:20px">
                   <div class="col-md-4" *ngFor="let long_shot of product.long_shot_media;let index= index">
-                    <img src="./assets/img/user_profile.png" style="width:50%">
+                    <img src="{{mediaUrl}}{{long_shot.media_link}}" style="width:50%">
                     <button type="button btn-secondary" type="button" mat-icon-button
                       (click)="deleteImage(index, 'long_shot')">
                       <mat-icon>delete</mat-icon>
