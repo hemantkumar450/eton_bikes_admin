@@ -161,6 +161,8 @@ export class ProductDetailComponent implements OnInit {
       this.product.close_up_media.push(event.data);
     } else if (type == "long_shot") {
       this.product.long_shot_media.push(event.data);
+    } else if (type == "display_media_banner") {
+      this.displayMedia.url = `${this.mediaUrl}${event.data.media_link}`;
     }
   }
 

@@ -93,7 +93,7 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <mat-form-field>
                     <mat-select [(ngModel)]="displayMedia.category" name="featureKey" #featureKey="ngModel"
                       placeholder="Select a feature">
@@ -103,9 +103,15 @@
                     </mat-select>
                   </mat-form-field>
                 </div>
+                <div class="col-md-3" *ngIf="displayMedia.category == 'banner'">
+                  <app-file-uploader [param]="{}" [target]="targetUrl"
+                    (complete)="onFileComplete($event, 'display_media_banner')">
+                  </app-file-uploader>
+                </div>
                 <div class="col-md-4">
                   <mat-form-field>
-                    <input matInput type="text" name="feature.value" [(ngModel)]="displayMedia.url" placeholder="Value">
+                    <input disabled="displayMedia.category == 'banner'" matInput type="text" name="feature.value"
+                      [(ngModel)]="displayMedia.url" placeholder="Value">
                   </mat-form-field>
                 </div>
                 <div class="col-md-2">
