@@ -96,7 +96,7 @@
                 <div class="col-md-3">
                   <mat-form-field>
                     <mat-select [(ngModel)]="displayMedia.category" name="featureKey" #featureKey="ngModel"
-                      placeholder="Select a feature">
+                      placeholder="Select a Display Media Type">
                       <mat-option *ngFor="let cat of mediaCategories" [value]="cat">
                         {{cat | uppercase}}
                       </mat-option>
@@ -110,7 +110,7 @@
                 </div>
                 <div class="col-md-4">
                   <mat-form-field>
-                    <input disabled="displayMedia.category == 'banner'" matInput type="text" name="feature.value"
+                    <input [disabled]="displayMedia.category == 'banner'" matInput type="text" name="displayMedia.url"
                       [(ngModel)]="displayMedia.url" placeholder="Value">
                   </mat-form-field>
                 </div>
