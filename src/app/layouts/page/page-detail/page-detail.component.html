@@ -76,7 +76,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-4 ">
+                                        <!-- <div class="col-md-4 ">
                                             <mat-form-field>
                                                 <input matInput type="text" name="section.name{{index}}"
                                                     [(ngModel)]="section.name" #sectionName="ngModel" placeholder="Name"
@@ -85,7 +85,7 @@
                                                     Name is <strong>required</strong>
                                                 </mat-error>
                                             </mat-form-field>
-                                        </div>
+                                        </div> -->
                                         <div class="col-md-6 ">
                                             <mat-form-field>
                                                 <input matInput type="text" name="section.heading{{index}}"
@@ -98,17 +98,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-4 ">
-                                            <mat-form-field>
-                                                <mat-select [(ngModel)]="section.media_side" name="pageType{{index}}"
-                                                    #media="ngModel" placeholder="Select a Media Side" required>
-                                                    <mat-option *ngFor="let media of mediaSides" [value]="media">
-                                                        {{media | uppercase}}
-                                                    </mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </div>
-                                        <div class="col-md-4 ">
+                                        <div class="col-md-4">
                                             <mat-form-field>
                                                 <mat-select [(ngModel)]="section.sectionType"
                                                     name="sectionType{{index}}" #sectionType="ngModel"
@@ -120,9 +110,19 @@
                                                 </mat-select>
                                             </mat-form-field>
                                         </div>
+                                        <div class="col-md-4" *ngIf="section.sectionType === 'media_panel'">
+                                            <mat-form-field>
+                                                <mat-select [(ngModel)]="section.media_side" name="pageType{{index}}"
+                                                    #media="ngModel" placeholder="Select a Media Side" required>
+                                                    <mat-option *ngFor="let media of mediaSides" [value]="media">
+                                                        {{media | uppercase}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
                                     </div>
 
-                                    <div class="card-body">
+                                    <div class="card-body" *ngIf="section.sectionType === 'media_panel'">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <strong>Redirect Details</strong>
@@ -170,7 +170,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="card-body">
+                                    <div class="card-body" *ngIf="section.sectionType !== 'api_call'">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 Media
@@ -196,7 +196,8 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-6"
+                                        *ngIf="section.sectionType !== 'banner' && section.sectionType !== 'api_call'">
                                         <ckeditor [(ngModel)]="section.content" name="page.content_{{index}}"
                                             [config]="ckeConfig" debounce="500">
                                         </ckeditor>

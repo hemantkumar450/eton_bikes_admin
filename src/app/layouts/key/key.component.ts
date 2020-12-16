@@ -61,6 +61,7 @@ export class KeyComponent implements OnInit {
       .subscribe((result) => {
         if (result) {
           this.keyService.saveKey(result.response).subscribe((res) => {
+            this.key = {};
             this.getKeys();
           });
         }
