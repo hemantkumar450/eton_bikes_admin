@@ -18,7 +18,7 @@ import { MatTableDataSource } from "@angular/material/table";
   providers: [PopUpModalService],
 })
 export class SubProductListComponent implements OnInit {
-  displayedColumns: string[] = ["name", "description", "edit", "changeStatus"];
+  displayedColumns: string[] = ["name", "description", "edit", "delete"];
   subProducts = new MatTableDataSource<SubProduct>();
   pageSize: Number = PaginationEnum.PageSize;
   totalRecords: number = 10;
@@ -60,14 +60,14 @@ export class SubProductListComponent implements OnInit {
     this.router.navigate([route]);
   }
 
-  deleteSubProduct(subProductId: string) {
+  deleteSubProduct(subProduct) {
     const html = `<h3 mat-dialog-title>Are you sure want to delete this sub product ?</h3>`;
     this.popUpModalService
       .openDialog({ html, component: null })
       .subscribe((res) => {
         if (res) {
           this.subProductService
-            .deleteSubProduct(subProductId)
+            .deleteSubProduct(subProduct._id)
             .subscribe((res) => {
               this.getSubProducts();
             });

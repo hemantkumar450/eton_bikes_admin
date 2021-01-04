@@ -39,9 +39,9 @@ export class SubProductService {
     );
   }
 
-  deleteSubProduct(productId): Observable<SubProduct> {
+  deleteSubProduct(subProductId: string): Observable<SubProduct> {
     return this.http.delete<SubProduct>(
-      `${environment.baseUrl}admin/subProducts`
+      `${environment.baseUrl}admin/subProducts/${subProductId}`
     );
   }
 }

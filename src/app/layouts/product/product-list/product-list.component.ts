@@ -22,9 +22,8 @@ export class ProductListComponent implements OnInit {
     "name",
     "slug",
     "title",
-    "view",
     "edit",
-    "changeStatus",
+    "delete",
   ];
   products = new MatTableDataSource<Product>();
   pageSize: Number = PaginationEnum.PageSize;
@@ -65,14 +64,16 @@ export class ProductListComponent implements OnInit {
     this.router.navigate([route]);
   }
 
-  deleteProduct(productId: string) {
+  deleteProduct(product: Product) {
     const html = `<h3 mat-dialog-title>Are you sure want to delete this product ?</h3>`;
     this.popUpModalService
       .openDialog({ html, component: null })
       .subscribe((res) => {
-        this.productService.deleteProduct(productId).subscribe((res) => {
-          this.getProducts();
-        });
+        if (res) {
+          this.productService.deleteProduct(product._id).subscribe((res) => {
+            this.getProducts();
+          });
+        }
       });
   }
 

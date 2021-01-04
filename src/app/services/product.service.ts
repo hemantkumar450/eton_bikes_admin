@@ -37,6 +37,8 @@ export class ProductService {
   }
 
   deleteProduct(productId): Observable<Product> {
-    return this.http.delete<Product>(`${environment.baseUrl}admin/products`);
+    return this.http.delete<Product>(
+      `${environment.baseUrl}admin/products/${productId}`
+    );
   }
 }
